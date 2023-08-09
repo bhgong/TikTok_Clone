@@ -5,11 +5,13 @@ import 'package:tiktok_clone/constants/sizes.dart';
 class AuthButton extends StatelessWidget {
   final String text;
   final FaIcon icon;
+  // final GestureDetector onTap;
 
   const AuthButton({
     super.key,
     required this.text,
     required this.icon,
+    // required this.onTap,
   });
 
   @override
