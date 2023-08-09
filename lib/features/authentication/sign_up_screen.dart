@@ -60,17 +60,25 @@ class SignUpScreen extends StatelessWidget {
                   text: "Use email & password",
                 ),
               ),
+              // AuthButton(
+              //   icon: FaIcon(FontAwesomeIcons.user),
+              //   text: "Use email & password",
+              //   // onTapRoute: () => onEmailTap(context),
+              // ),
+
               Gaps.v20,
               const AuthButton(
-                  icon: FaIcon(FontAwesomeIcons.apple),
-                  text: "Continue with Apple"),
+                icon: FaIcon(FontAwesomeIcons.apple),
+                text: "Continue with Apple",
+                // onTapRoute: () => onEmailTap(context),
+              ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 1,
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade50,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: Sizes.size32),
           child: Row(

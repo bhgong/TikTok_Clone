@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
+typedef TapRouteFunction = void Function();
+// typedef GestureTapCallback = void Function();
+
 class AuthButton extends StatelessWidget {
   final String text;
   final FaIcon icon;
+  // final TapRouteFunction? onTapRoute; // for Code Challenge
   // final GestureDetector onTap;
 
   const AuthButton({
     super.key,
     required this.text,
     required this.icon,
-    // required this.onTap,
+    // this.onTapRoute, // for Code Challenge
   });
 
   @override
