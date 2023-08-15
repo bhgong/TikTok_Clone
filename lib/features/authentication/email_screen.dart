@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/password_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
 class EmailScreen extends StatefulWidget {
@@ -42,58 +43,80 @@ class _EmailScreenState extends State<EmailScreen> {
     return null;
   }
 
+  void _onScaffoldTap() {
+    FocusScope.of(context).unfocus();
+  }
+
+  void _onSubmit() {
+    if (_email.isEmpty || _isEmailVaild() != null) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const PassWordScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        foregroundColor: Colors.black,
-        elevation: 0,
+    return GestureDetector(
+      onTap: _onScaffoldTap,
+      child: Scaffold(
         backgroundColor: Colors.white,
-        title: const Text(
-          "Sign up",
+        appBar: AppBar(
+          foregroundColor: Colors.black,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          title: const Text(
+            "Sign up",
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Sizes.size36,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gaps.v40,
-            const Text(
-              "What is your email?",
-              style: TextStyle(
-                fontSize: Sizes.size20,
-                fontWeight: FontWeight.w600,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.size36,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gaps.v40,
+              const Text(
+                "What is your email?",
+                style: TextStyle(
+                  fontSize: Sizes.size20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
 
-            Gaps.v16,
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                errorText: _isEmailVaild(),
-                hintText: "Email",
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade400,
+              Gaps.v16,
+              TextField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                autocorrect: false, // 자동수정 기능
+                onEditingComplete: _onSubmit,
+                decoration: InputDecoration(
+                  errorText: _isEmailVaild(),
+                  hintText: "Email",
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
                   ),
                 ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade400,
-                  ),
-                ),
+                cursorColor: Theme.of(context).primaryColor,
               ),
-              cursorColor: Theme.of(context).primaryColor,
-            ),
-            Gaps.v28,
-            GestureDetector(
-              child: FormButton(disabled: _email.isEmpty),
-            ), // FormButton은
-          ],
+              Gaps.v28,
+              GestureDetector(
+                onTap: _onSubmit,
+                child: FormButton(
+                    disabled: _email.isEmpty || _isEmailVaild() != null),
+              ), // FormButton은
+            ],
+          ),
         ),
       ),
     );
