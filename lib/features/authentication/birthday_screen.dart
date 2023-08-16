@@ -1,40 +1,40 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/email_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
-class UsernameScreen extends StatefulWidget {
-  const UsernameScreen({super.key});
+class BirthdayScreen extends StatefulWidget {
+  const BirthdayScreen({super.key});
 
   @override
-  State<UsernameScreen> createState() => _UsernameScreenState();
+  State<BirthdayScreen> createState() => _BirthdayScreenState();
 }
 
-class _UsernameScreenState extends State<UsernameScreen> {
-  final TextEditingController _usernameController = TextEditingController();
+class _BirthdayScreenState extends State<BirthdayScreen> {
+  final TextEditingController _birthdayController = TextEditingController();
 
-  String _username = "";
+  DateTime initialDate = DateTime.now();
+  // final twelveYearsAgo = initialDate;
 
   @override
   void initState() {
     super.initState();
-    _usernameController.addListener(() {
-      // print(_usernameController.text);
-      setState(() {
-        _username = _usernameController.text;
-      });
-    });
+    // initialDate = initialDate.subtract(
+    //   const Duration(days: 24 * 3600 * 365 * 12),
+    // );
+    _setTextFieldDate(initialDate);
+    // print(initialDate);
   }
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _birthdayController.dispose();
     super.dispose();
   }
 
   void _onNextTap() {
-    if (_username.isEmpty) return;
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const EmailScreen(),
@@ -42,8 +42,17 @@ class _UsernameScreenState extends State<UsernameScreen> {
     );
   }
 
+  void _setTextFieldDate(DateTime date) {
+    final textDate = date.toString().split(" ").first;
+    _birthdayController.value = TextEditingValue(text: textDate);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final twelveYearsAgo = initialDate.subtract(
+      const Duration(days: 12 * 365),
+    );
+    print(twelveYearsAgo);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -63,7 +72,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
           children: [
             Gaps.v40,
             const Text(
-              "Create username",
+              "When is your birthday",
               style: TextStyle(
                 fontSize: Sizes.size20,
                 fontWeight: FontWeight.w600,
@@ -71,7 +80,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
             ),
             Gaps.v8,
             const Text(
-              "You can always change this later.",
+              "Your birthday won't be shown publicly.",
               style: TextStyle(
                 fontSize: Sizes.size16,
                 color: Colors.black54,
@@ -79,9 +88,9 @@ class _UsernameScreenState extends State<UsernameScreen> {
             ),
             Gaps.v16,
             TextField(
-              controller: _usernameController,
+              controller: _birthdayController,
+              enabled: false,
               decoration: InputDecoration(
-                hintText: "Username",
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.grey.shade400,
@@ -98,9 +107,20 @@ class _UsernameScreenState extends State<UsernameScreen> {
             Gaps.v28,
             GestureDetector(
               onTap: _onNextTap,
-              child: FormButton(disabled: _username.isEmpty),
+              child: const FormButton(disabled: false),
             ), // FormButton은
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: SizedBox(
+          height: 300,
+          child: CupertinoDatePicker(
+            maximumDate: twelveYearsAgo, // Code challenege 있어요! 12년 전으로 표현하는 것
+            initialDateTime: twelveYearsAgo,
+            mode: CupertinoDatePickerMode.date,
+            onDateTimeChanged: _setTextFieldDate,
+          ),
         ),
       ),
     );
