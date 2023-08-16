@@ -52,7 +52,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
     final twelveYearsAgo = initialDate.subtract(
       const Duration(days: 12 * 365),
     );
-    print(twelveYearsAgo);
+    // print(twelveYearsAgo);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -107,7 +107,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
             Gaps.v28,
             GestureDetector(
               onTap: _onNextTap,
-              child: const FormButton(disabled: false),
+              child: const FormButton(
+                disabled: false,
+                text: "Next",
+              ),
             ), // FormButton은
           ],
         ),
