@@ -36,7 +36,9 @@ class _PassWordScreenState extends State<PassWordScreen> {
   }
 
   bool _isPassWordVaild() {
-    return _password.isNotEmpty && _password.length > 8;
+    return _password.isNotEmpty &&
+        _password.length > 8 &&
+        _password.length <= 20;
   }
 
   void _onScaffoldTap() {
@@ -48,7 +50,7 @@ class _PassWordScreenState extends State<PassWordScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const BirthDayScreen(),
+        builder: (context) => const BirthdayScreen(),
       ),
     );
   }
