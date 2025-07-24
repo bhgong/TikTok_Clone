@@ -60,12 +60,6 @@ class SignUpScreen extends StatelessWidget {
                   text: "Use email & password",
                 ),
               ),
-              // AuthButton(
-              //   icon: FaIcon(FontAwesomeIcons.user),
-              //   text: "Use email & password",
-              //   // onTapRoute: () => onEmailTap(context),
-              // ),
-
               Gaps.v20,
               const AuthButton(
                 icon: FaIcon(FontAwesomeIcons.apple),
@@ -80,11 +74,18 @@ class SignUpScreen extends StatelessWidget {
         elevation: 1,
         color: Colors.grey.shade50,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: Sizes.size32),
+          padding: const EdgeInsets.symmetric(vertical: Sizes.size2),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Already have an account?'),
+              const Text(
+                'Already have an account?',
+                style: TextStyle(
+                  fontSize: 15,
+                  // fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+              ),
               Gaps.h5,
               GestureDetector(
                 onTap: () => onLoginTap(context),
