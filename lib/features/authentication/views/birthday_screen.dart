@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/authentication/email_screen.dart';
-import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
+import 'package:tiktok_clone/features/authentication/views/email_screen.dart';
+import 'package:tiktok_clone/features/authentication/views/widgets/form_button.dart';
 
 class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key});
@@ -21,11 +21,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   @override
   void initState() {
     super.initState();
-    // initialDate = initialDate.subtract(
-    //   const Duration(days: 24 * 3600 * 365 * 12),
-    // );
     _setTextFieldDate(initialDate);
-    // print(initialDate);
   }
 
   @override
@@ -52,7 +48,6 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
     final twelveYearsAgo = initialDate.subtract(
       const Duration(days: 12 * 365),
     );
-    print(twelveYearsAgo);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
